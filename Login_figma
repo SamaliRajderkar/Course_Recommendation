@@ -17,6 +17,7 @@
       height: 80vh; /* 80% of the viewport height */
       background-color: #ffffff;
       border: 20px solid #23374D; /* Blue thick border */
+      border-radius: 50px;
       margin: 10% auto; /* Center the rectangle vertically and horizontally */
       box-sizing: border-box; /* Include border in width/height calculation */
       position: relative; /* Position the text relative to the rectangle */
@@ -29,12 +30,12 @@
 
     .login-text {
       position: absolute;
-      top: 100px; /* Distance from the top */
+      top: 120px; /* Distance from the top */
       left: 50%; /* Center horizontally */
       transform: translateX(-50%); /* Adjust for centering */
       font-weight: bold; /* Bold text */
       color: #000000; /* Black color */
-      font-size: 35px; /* Font size in pixels */
+      font-size: 45px; /* Font size in pixels */
     }
 
     .input-container {
@@ -47,7 +48,7 @@
     .input-box {
       background-color: #dddddd; /* Grey background color */
       width: 500px;
-      padding: 10px;
+      padding: 20px;
       margin-top: 10px;
       display: flex;
       align-items: center;
@@ -79,7 +80,10 @@
       border-radius: 5px;
     }
 
-   
+    .continue-button:hover {
+  background-color: #00A8CC; /* Change background color on hover */
+  color: white; /* Change text color on hover */
+}
 
     /* Hide background text when user starts typing */
     input:focus + .input-label {
