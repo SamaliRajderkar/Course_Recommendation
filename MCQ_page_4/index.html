@@ -55,14 +55,43 @@
     var options = document.querySelectorAll('.option');
 
     
-    options.forEach(function(option) {
-       
-        option.addEventListener('click', function() {
-           
+   
+    
+
+  
+    document.querySelector('.next').addEventListener('click', function() {
+        
+        var selectedOptions = [];
+
+     
+        var options = document.querySelectorAll('.option');
+
+        options.forEach(function(option) {
             var checkbox = option.querySelector('input[type="checkbox"]');
-            checkbox.checked = !checkbox.checked;
+            if (checkbox.checked) {
+                
+                selectedOptions.push(option.querySelector('label').textContent);
+            }
         });
+
+        console.log('Selected Options:', selectedOptions);
+        sessionStorage.setItem("proefficient", selectedOptions);
+        
+        
     });
+
+    var myData = {
+        domain: sessionStorage.getItem('domain'),
+        duration: sessionStorage.getItem('duration'),
+        skill: sessionStorage.getItem('skill'),
+        proefficient: sessionStorage.getItem('proefficient'),
+        // Add more key-value pairs as needed
+
+    };
+
+    console.log(myData);
+
+
 </script>
 </body>
 </html>
