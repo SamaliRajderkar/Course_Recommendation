@@ -22,22 +22,27 @@
         <div class="question">
           Which skills are you already proficient in ?
         </div>
-        <div class="options-block">
+        <<div class="options-block">
           <div class="option">
-            <h2>A</h2>
-          </div>
+            <input type="checkbox" id="optionA" name="optionA">
+            <label for="optionA">A</label>
+        </div>
           <div class="option">
-            <h2>B</h2>
-          </div>
-          <div class="option">
-            <h2>C</h2>
-          </div>
-          <div class="option">
-            <h2>D</h2>
-          </div>
-          <div class="option">
-            <h2>E</h2>
-          </div>
+            <input type="checkbox" id="optionB" name="optionB">
+            <label for="optionB">B</label>
+        </div>
+        <div class="option">
+          <input type="checkbox" id="optionC" name="optionC">
+          <label for="optionC">C</label>
+      </div>
+      <div class="option">
+        <input type="checkbox" id="optionD" name="optionD">
+        <label for="optionD">D</label>
+    </div>
+    <div class="option">
+      <input type="checkbox" id="optionE" name="optionE">
+      <label for="optionE">E</label>
+  </div>
         </div>
       </div>
       <div class="next">
@@ -45,6 +50,19 @@
         
       </div>
   </div>
-  
+  <script>
+    
+    var options = document.querySelectorAll('.option');
+
+    
+    options.forEach(function(option) {
+       
+        option.addEventListener('click', function() {
+           
+            var checkbox = option.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+        });
+    });
+</script>
 </body>
 </html>
