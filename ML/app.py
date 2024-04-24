@@ -7,14 +7,34 @@ import pickle
 app = Flask(__name__)
 
 # Load the necessary data for recommendation
-newc = pd.read_pickle(r"C:\Users\hp\Desktop\ML\venv_name\model.pkl")
-similarity =pd.read_pickle(r"C:\Users\hp\Desktop\ML\venv_name\similarity.pkl")
+newc = pd.read_pickle(r"venv_name\model.pkl")
+similarity =pd.read_pickle(r"venv_name\similarity.pkl")
 
 
 
 @app.route('/')
 def home():
+    return render_template('index.html')
+
+@app.route('/about', endpoint='about')
+def about_page():
+    return render_template('about.html')
+
+
+@app.route('/login', endpoint='login')
+def about_page():
+    return render_template('login.html')
+
+@app.route('/contactus')
+def about_page():
+    return render_template('contactus.html')
+
+@app.route('/form', endpoint='form')
+def about_page():
     return render_template('form.html')
+@app.route('/blog', endpoint='blog')
+def about_page():
+    return render_template('blog.html')
 
 @app.route('/recommend', methods=['POST'])
 def recommend():
@@ -51,7 +71,9 @@ def get_recommendations(domain, min_duration, max_duration, level):
                 'course_title': newc.iloc[course_index]['course_title'],
                 'duration': course_duration,
                 'level': course_level,
-                'url': newc.iloc[course_index]['url']  
+                'url': newc.iloc[course_index]['url'],
+                'is_paid': newc.iloc[course_index]['is_paid'],
+                'price': newc.iloc[course_index]['price']
             })
 
         if len(recommended_courses) >= 5:

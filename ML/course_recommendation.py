@@ -11,7 +11,7 @@ import pandas as pd
 import numpy as np
 import pickle
 
-courses=pd.read_csv(r"C:\Users\hp\Desktop\ML\venv_name\udemy_courses.csv")
+courses=pd.read_csv(r"venv_name\udemy_courses.csv")
 
 courses.head()
 
@@ -26,11 +26,13 @@ courses["subject"].value_counts()
 
 courses.info()
 
-courses=courses[['course_title','url','is_paid','num_subscribers','level','content_duration','subject']]
+courses=courses[['course_title','url','is_paid','price','num_subscribers','level','content_duration','subject']]
 courses['title']=courses['course_title'].copy()
 courses['domain']=courses['subject'].copy()
 courses['level']=courses['level'].copy()
 courses['url']=courses['url'].copy()
+courses['is_paid']=courses['is_paid'].copy()
+courses['price']=courses['price'].copy()
 courses.head()
 
 courses.isnull().sum()
@@ -65,6 +67,7 @@ courses['durations']=courses['content_duration'].copy()
 print(courses)
 
 courses['is_paid'] = courses['is_paid'].astype(str)
+courses['price'] = courses['price'].astype(str)
 courses['num_subscribers'] = courses['num_subscribers'].astype(str)
 
 courses['content_duration'] = courses['content_duration'].astype(str)
@@ -91,7 +94,7 @@ courses.head()
 
 courses['tags']=courses['is_paid']+courses['content_duration']+courses['subject']+courses['course_level']
 
-newc = courses[['course_title','durations','domain','tags','level','url']]
+newc = courses[['course_title','durations','domain','tags','level','url','is_paid','price']]
 newc
 
 newc['tags'] = newc['tags'].apply(lambda x:" ".join(x))
@@ -139,7 +142,9 @@ def recommend(domain, min_duration=None, max_duration=None,level = 'AllLevels'):
                 'course_title': newc.iloc[course_index]['course_title'],
                 'duration': course_duration,
                 'level': course_level,
-                'url': courses.iloc[course_index]['url']  # Get URL from original courses dataframe
+                'url': courses.iloc[course_index]['url'] , # Get URL from original courses dataframe
+                'is_paid': courses.iloc[course_index]['is_paid'],  # Get is_paid status from original courses dataframe
+                'price': courses.iloc[course_index]['price']
             })
 
         if len(recommended_courses) >= 30:
@@ -157,7 +162,7 @@ def recommend(domain, min_duration=None, max_duration=None,level = 'AllLevels'):
 
     
 
-# # Call the function with a course title and optional duration range
+# Call the function with a course title and optional duration range
 # recommend("Web Development", min_duration=1, max_duration=2,level = "BeginnerLevel")
 pickle.dump(newc,open('model.pkl','wb'))
 model=pickle.load(open('model.pkl','rb'))
